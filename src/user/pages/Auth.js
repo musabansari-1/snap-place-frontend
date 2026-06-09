@@ -14,6 +14,7 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
+import API_URL from '../../shared/util/api';
 import './Auth.css';
 
 const Auth = () => {
@@ -70,7 +71,7 @@ const Auth = () => {
     if (isLoginMode) {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_API_URL}/api/users/login`,
+          `${API_URL}/api/users/login`,
           'POST',
           JSON.stringify({
             email: formState.inputs.email.value,
@@ -90,7 +91,7 @@ const Auth = () => {
         formData.append('password', formState.inputs.password.value);
         formData.append('image', formState.inputs.image.value);
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_API_URL}/api/users/signup`,
+          `${API_URL}/api/users/signup`,
           'POST',
           formData
         );

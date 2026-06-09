@@ -4,6 +4,7 @@ import PlaceList from '../components/PlaceList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import API_URL from '../../shared/util/api';
 import './HomeFeed.css';
 
 const HomeFeed = () => {
@@ -14,7 +15,7 @@ const HomeFeed = () => {
     const fetchPlaces = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_API_URL}/api/places`
+          `${API_URL}/api/places`
         );
 
         setLoadedPlaces(responseData.places);

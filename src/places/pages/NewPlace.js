@@ -13,6 +13,7 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
+import API_URL from '../../shared/util/api';
 import './PlaceForm.css';
 
 const NewPlace = () => {
@@ -50,7 +51,7 @@ const NewPlace = () => {
       formData.append('description', formState.inputs.description.value);
       formData.append('address', formState.inputs.address.value);
       formData.append('image', formState.inputs.image.value);
-      await sendRequest(`${process.env.REACT_APP_API_URL}/api/places`, 'POST', formData, {
+      await sendRequest(`${API_URL}/api/places`, 'POST', formData, {
         Authorization: 'Bearer ' + auth.token
       });
       history.push('/');

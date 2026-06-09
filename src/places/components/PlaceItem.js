@@ -9,6 +9,7 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import API_URL from '../../shared/util/api';
 import './PlaceItem.css';
 
 const formatRelativeTime = value => {
@@ -66,7 +67,7 @@ const PlaceItem = props => {
     setShowConfirmModal(false);
     try {
       await sendRequest(
-        `${process.env.REACT_APP_API_URL}/api/places/${props.id}`,
+        `${API_URL}/api/places/${props.id}`,
         'DELETE',
         null,
         {
