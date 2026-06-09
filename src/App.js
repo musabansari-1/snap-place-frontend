@@ -6,7 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 
-import Users from './user/pages/Users';
+import HomeFeed from './places/pages/HomeFeed';
 import NewPlace from './places/pages/NewPlace';
 import UserPlaces from './places/pages/UserPlaces';
 import UpdatePlace from './places/pages/UpdatePlace';
@@ -24,7 +24,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
+          <HomeFeed />
         </Route>
         <Route path="/:userId/places" exact>
           <UserPlaces />
@@ -42,7 +42,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
+          <HomeFeed />
         </Route>
         <Route path="/:userId/places" exact>
           <UserPlaces />

@@ -11,7 +11,7 @@ const NavLinks = props => {
     <ul className="nav-links">
       <li>
         <NavLink to="/" exact>
-          HOME
+          FEED
         </NavLink>
       </li>
       {auth.isLoggedIn && (

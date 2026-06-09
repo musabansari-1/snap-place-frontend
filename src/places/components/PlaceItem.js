@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 
+import Avatar from '../../shared/components/UIElements/Avatar';
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
@@ -10,11 +11,44 @@ import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './PlaceItem.css';
 
+const formatRelativeTime = value => {
+  if (!value) {
+    return 'recently';
+  }
+
+  const diffInMs = Date.now() - new Date(value).getTime();
+
+  if (Number.isNaN(diffInMs) || diffInMs < 0) {
+    return 'recently';
+  }
+
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+
+  if (diffInMs < minute) {
+    return 'just now';
+  }
+
+  if (diffInMs < hour) {
+    return `${Math.floor(diffInMs / minute)}m ago`;
+  }
+
+  if (diffInMs < day) {
+    return `${Math.floor(diffInMs / hour)}h ago`;
+  }
+
+  return `${Math.floor(diffInMs / day)}d ago`;
+};
+
 const PlaceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const creator = props.creator && props.creator.name ? props.creator : null;
+  const creatorId =
+    props.creatorId && props.creatorId.id ? props.creatorId.id : props.creatorId;
 
   const openMapHandler = () => setShowMap(true);
 
@@ -83,11 +117,26 @@ const PlaceItem = props => {
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
           <div className="place-item__image">
-            <img
-              src={`${props.image}`}
-              alt={props.title}
-            />
+            <img src={`${props.image}`} alt={props.title} />
           </div>
+          {creator && (
+            <div className="place-item__meta">
+              <div className="place-item__author">
+                <Avatar
+                  image={creator.image}
+                  alt={creator.name}
+                  width="2.75rem"
+                />
+                <div className="place-item__author-info">
+                  <span className="place-item__author-label">Posted by</span>
+                  <strong>{creator.name}</strong>
+                </div>
+              </div>
+              <span className="place-item__time">
+                {formatRelativeTime(props.createdAt)}
+              </span>
+            </div>
+          )}
           <div className="place-item__info">
             <h2>{props.title}</h2>
             <h3>{props.address}</h3>
@@ -97,11 +146,11 @@ const PlaceItem = props => {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {auth.userId === props.creatorId && (
+            {auth.userId === creatorId && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
 
-            {auth.userId === props.creatorId && (
+            {auth.userId === creatorId && (
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
               </Button>
