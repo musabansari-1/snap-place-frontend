@@ -4,12 +4,25 @@
 }
 
 .authentication {
-  width: 90%;
-  max-width: 25rem;
-  margin: 7rem auto;
+  width: min(92%, 28rem);
+  max-width: 28rem;
+  margin: 2rem auto 0;
   text-align: center;
 }
 
 .authentication form {
   margin-bottom: 1rem;
+}
+
+.authentication h2 {
+  margin-top: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.03em;
+  font-size: 1.7rem;
+}
+
+.authentication hr {
+  border: 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+  margin: 1rem 0 1.25rem;
 }
