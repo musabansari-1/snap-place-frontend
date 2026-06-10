@@ -9,9 +9,14 @@ const PlaceList = props => {
   if (props.items.length === 0) {
     return (
       <div className="place-list center">
-        <Card>
-          <h2>No posts yet. Be the first to share a place.</h2>
-          <Button to="/places/new">Share Place</Button>
+        <Card className="place-list__empty">
+          <p className="place-list__empty-kicker">Feed is quiet</p>
+          <h2>No places posted yet.</h2>
+          <p>
+            Once people start sharing, this space will fill with image-first
+            posts, location details, and quick actions.
+          </p>
+          <Button to="/places/new">Share a place</Button>
         </Card>
       </div>
     );

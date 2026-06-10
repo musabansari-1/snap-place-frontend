@@ -2,8 +2,32 @@
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  width: min(92%, 76rem);
+  width: min(100%, 48rem);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.place-list__empty {
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.place-list__empty-kicker {
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #93c5fd;
+  font-size: 0.75rem;
+}
+
+.place-list__empty h2 {
+  margin: 0 0 0.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.place-list__empty p {
+  margin: 0 0 1rem;
+  color: var(--text-secondary);
+  max-width: 34rem;
 }

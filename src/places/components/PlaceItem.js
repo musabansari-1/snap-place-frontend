@@ -117,9 +117,6 @@ const PlaceItem = props => {
       <li className="place-item">
         <Card className="place-item__content">
           {isLoading && <LoadingSpinner asOverlay />}
-          <div className="place-item__image">
-            <img src={`${props.image}`} alt={props.title} />
-          </div>
           {creator && (
             <div className="place-item__meta">
               <div className="place-item__author">
@@ -129,33 +126,35 @@ const PlaceItem = props => {
                   width="2.75rem"
                 />
                 <div className="place-item__author-info">
-                  <span className="place-item__author-label">Posted by</span>
                   <strong>{creator.name}</strong>
+                  <span>{formatRelativeTime(props.createdAt)}</span>
                 </div>
               </div>
-              <span className="place-item__time">
-                {formatRelativeTime(props.createdAt)}
-              </span>
+              <span className="place-item__badge">Place post</span>
             </div>
           )}
-          <div className="place-item__info">
-            <h2>{props.title}</h2>
-            <h3>{props.address}</h3>
-            <p>{props.description}</p>
+          <div className="place-item__image">
+            <img src={`${props.image}`} alt={props.title} />
           </div>
-          <div className="place-item__actions">
-            <Button inverse onClick={openMapHandler}>
-              VIEW ON MAP
-            </Button>
-            {auth.userId === creatorId && (
-              <Button to={`/places/${props.id}`}>EDIT</Button>
-            )}
-
-            {auth.userId === creatorId && (
-              <Button danger onClick={showDeleteWarningHandler}>
-                DELETE
+          <div className="place-item__body">
+            <div className="place-item__info">
+              <h2>{props.title}</h2>
+              <p className="place-item__address">{props.address}</p>
+              <p className="place-item__description">{props.description}</p>
+            </div>
+            <div className="place-item__actions">
+              <Button inverse onClick={openMapHandler}>
+                Open map
               </Button>
-            )}
+              {auth.userId === creatorId && (
+                <Button to={`/places/${props.id}`}>Edit</Button>
+              )}
+              {auth.userId === creatorId && (
+                <Button danger onClick={showDeleteWarningHandler}>
+                  Delete
+                </Button>
+              )}
+            </div>
           </div>
         </Card>
       </li>
